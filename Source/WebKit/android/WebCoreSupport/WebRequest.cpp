@@ -391,6 +391,7 @@ void WebRequest::OnReceivedRedirect(net::URLRequest* newRequest, const GURL& new
     ASSERT(m_loadState < Response, "Redirect after receiving response");
     ASSERT(newRequest && newRequest->status().is_success(), "Invalid redirect");
 
+    m_url = newUrl.spec();
     OwnPtr<WebResponse> webResponse(new WebResponse(newRequest));
     webResponse->setUrl(newUrl.spec());
     m_urlLoader->maybeCallOnMainThread(NewRunnableMethod(
